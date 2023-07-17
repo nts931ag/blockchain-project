@@ -21,6 +21,7 @@ export const Input  = (props) => {
           ></i>
         )}
         <input
+          onChange={props.onChangeText}
           className="input__text"
           type={`${Type}`}
           placeholder={props.placeHolder}

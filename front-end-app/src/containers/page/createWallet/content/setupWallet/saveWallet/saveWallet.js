@@ -1,26 +1,65 @@
 // @flow 
-import React, {useState} from 'react';
+import CryptoJS from 'crypto-js';
+import EC from 'elliptic';
+
+import React, {useState, useContext, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import './style.scss';
 import { Modal } from '../../../../../../components/modal/modal';
-
+import { createWalletContext } from '../../../../../../contexts/createWalletContext';
 const enumState = {
     VISIBLE: 'visible',
     CLOSE: 'close',
     HIDDEN: 'hidden'
 }
+const ec = new EC.ec('secp256k1');
 
 export const SaveWallet = (props) => {
+    const {password} = useContext(createWalletContext);
     const history = useHistory();
     const [stateModal, setStateModal] = useState(enumState.HIDDEN);
-
+    const [active, setActive] = useState(false);
+    useEffect(() => {
+        setTimeout(() => {
+            setActive(true);
+        }, 5000);
+    }, [])
     const handleDowloadFile = () => {
+        if (!active) return; 
         setStateModal(enumState.VISIBLE);
+        dowloadKeystore();
     }
 
     const handleRedirect = () => {
         document.body.style = 'overflow-y: auto';
         history.push('/access-wallet');
+    }
+
+    const encryptPK = (privateKey, secretKey) => {
+        const key = CryptoJS.enc.Hex.parse(secretKey.substring(8,40)).toString();
+        var encrypted = CryptoJS.AES.encrypt(privateKey, key).toString();
+        console.log(privateKey);
+        //console.log(decryptPK(encrypted, secretKey));
+        
+        return encrypted;
+    }
+
+    const dowloadKeystore = () => {
+       
+        const fileName = `keystore-wallet-${Date.now()}.json`;
+        const passHash = CryptoJS.SHA256(password).toString();
+        const Key = ec.genKeyPair();
+        const data = {
+            address: Key.getPublic('hex'),
+            password: passHash,
+            crypt: encryptPK(Key.getPrivate('hex'), passHash)
+        }
+        var blob = new Blob([JSON.stringify(data)], {type: "text/plain"});
+        var url = window.URL.createObjectURL(blob);
+        var dowloadTag = document.createElement("a");
+        dowloadTag.href = url;
+        dowloadTag.download = fileName;
+        dowloadTag.click();
     }
 
     return (
@@ -59,9 +98,9 @@ export const SaveWallet = (props) => {
                     })
                 }
             </div>
-            <div className='basic-button button--icon-hidden' onClick={handleDowloadFile}>
+            <div className={`basic-button ${(active)? 'button--icon-hidden' : 'button--disabled'}`} onClick={handleDowloadFile}>
                 Download Keystore File
-                    <i className="fa fa-arrow-right basic-button__icon" aria-hidden="true"></i>
+                    <i className="fa fa-spinner fa-pulse fa-fw basic-button__icon" aria-hidden="true"></i>
             </div>
             
         </>

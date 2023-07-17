@@ -1,0 +1,57 @@
+@import '../../../../../../styleRoot/color.scss';
+
+.history-transaction{
+    background-color: $--white;
+
+    border-radius: 0.3rem;
+    padding: 1rem 0rem;
+    
+    &__title{
+        text-align: left;
+        padding-bottom: 1rem;
+
+        border-bottom: 1px solid rgba($color: $--gray, $alpha: .2);
+        p{
+            padding: 0rem 2rem;
+            margin: 0;
+
+            font-weight: bold;
+            font-size: 1.75rem;
+
+            
+            border-left: 5px solid $--main;
+        }
+    }
+
+    &__body{
+        min-height: 30vh;
+        max-height: 50vh;
+        display: flex;
+        padding: 1.5rem;
+        table{
+            width: 100%;
+            border-radius: 0.3rem;
+
+            
+            tr{
+               height: 3rem;
+               th{
+                    background-color: $--main-2;
+                    color: $--white;
+                    font-size: 1.2rem;
+                    
+                    &:first-child{
+                        width: 45%;
+                    }
+                }
+                td{
+                    background-color: $--light;
+                    text-align: left;
+                    padding: 0.5rem 1rem;
+                    font-weight: 500;
+                    word-break: break-word;
+                }
+            }
+        }
+    }
+}

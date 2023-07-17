@@ -8,9 +8,10 @@ import { Input } from '../../../../../../components/input/input';
 
 
 export const CreatePassword = (props) => {
-    const {step,setStep} = useContext(createWalletContext);
+    const {step,setStep,password, setPassword} = useContext(createWalletContext);
 
     const nextStep = () => {
+        if (password.length < 9) return;
         setStep(step+1);
     }
 
@@ -18,8 +19,8 @@ export const CreatePassword = (props) => {
         <>
             <h2 className='title'>Your Password</h2>
             <div className='password'>
-                <Input className='input--access' type='password' placeHolder='Please Enter At Least 9 Characters' name='password'></Input>
-                <div className='basic-button' onClick={nextStep}>
+                <Input onChangeText={(e) => {setPassword(e.target.value)}} className='input--access' type='password' placeHolder='Please Enter At Least 9 Characters' name='password'></Input>
+                <div className={`basic-button ${(password.length < 9)? 'button--disabled' : ''}`} onClick={nextStep}>
                     Next
                         <i class="fa fa-arrow-right basic-button__icon" aria-hidden="true"></i>
                 </div>
