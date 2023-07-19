@@ -20,7 +20,7 @@ export const SendTransaction = (props) => {
                         </div>
                     </div>
                     <div className='address'>
-                            <label>Amount</label>
+                            <label>Address</label>
                             <input type='text' placeholder='Please enter the address'/>
                     </div>
                     <div className='tx-fee'>

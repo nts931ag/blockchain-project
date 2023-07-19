@@ -1,9 +1,27 @@
 import './style.scss';
-
+import {useEffect } from 'react';
 import { TopBanner } from '../../topBanner/topBanner';
 import { About } from '../../about/about';
 import { FAQs } from '../../FAQs/FAQs';
+
+import {useLocation} from 'react-router-dom';
+
+import $ from 'jquery';
+
 export const Home = (props) => {
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.hash.length > 0){
+            $('html,body').animate({
+                scrollTop: $(location.hash).offset().top,
+            }, 500);
+        }
+        return () => {
+             $('html,body').animate({scrollTop: 0}, 500);
+        }
+    }, [window.location.href]);
+
     return (
         <div id='#' className="home">
             

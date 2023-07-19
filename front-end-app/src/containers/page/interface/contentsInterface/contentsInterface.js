@@ -1,9 +1,13 @@
 // @flow 
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import './style.scss';
 
-import { Modal } from '../../../../components/modal/modal';
+import {useHistory} from 'react-router-dom';
 
+import socketEvt from '../../../../core/sockEvt';
+import Blockchain from '../../../../core/blockchain';
+import io from 'socket.io-client';
+import { Modal } from '../../../../components/modal/modal';
 import {Dashboard, SendTransaction, HistoryTransaction} from './interfaceOptions';
 
 import { interfaceOptionContext } from '../../../../contexts/interfaceOptionContext';
@@ -13,12 +17,70 @@ const enumState = {
     CLOSE: 'close',
     VISIBLE: 'visible'
 }
-
-
+let socket,blockchain;
+const server = 'http://192.168.43.217:8080';
 export const ContentsInterface = (props) => {
+    const history = useHistory();
+
     const {option} = useContext(interfaceOptionContext);
-    const {myWallet} = useContext(authContext);
+    const {auth, myWallet, resetWallet} = useContext(authContext);
     const [modalState, setModalState] = useState(enumState.HIDDEN);
+    const [balance, setBalance] = useState(0);
+    const [lastBlockIndex, setLastBlockIndex] = useState(1);
+    useEffect(() => {
+        if (!auth){
+            history.push('/access-wallet');
+        }
+        socket = io(server);
+        blockchain = new Blockchain(socket);
+
+        return () => {
+            socket.disconnect();
+            socket.off();
+
+            resetWallet();
+        }
+    }, []);
+
+    //setup socket
+    useEffect(() => {
+        socket.on(socketEvt.ADD_NODE, (mainChain)=>{
+            blockchain.parseChain(mainChain);
+
+            setBalance(blockchain.getBalance(myWallet.publicKey.substring(2, myWallet.publicKey.length)));
+            setLastBlockIndex(blockchain.getLastBlock().index);
+        });
+        socket.on(socketEvt.ADD_TRANSACTION, (transaction) => {
+            blockchain.addTransaction(transaction);
+        });
+        socket.on(socketEvt.START_MINING, async ({ index, transactions, timeStamp, prevHash }) => {
+            console.log('start mining............');
+            blockchain.setMine(true);
+            transactions.push(blockchain.addTransactionReward(myWallet.publicKey.substring(2, myWallet.publicKey.length)));
+            const newblock = blockchain.proofOfWork(index, transactions, timeStamp, prevHash, 0);
+            newblock.then(result => {
+                console.log('stop mining....');
+                if (result !== null){
+                    blockchain.addBlock(result);
+                    setBalance(blockchain.getBalance(myWallet.publicKey.substring(2, myWallet.publicKey.length)));
+                    setLastBlockIndex(blockchain.getLastBlock().index);
+                    socket.emit(socketEvt.BROADCAST_ENDMINING, ({result: result}));
+                }
+            });
+        });
+        socket.on(socketEvt.END_MINING, (newBlock) => {
+            console.log('end mining....');
+            blockchain.setMine(false);    
+            blockchain.addBlock(newBlock);
+
+            setBalance(blockchain.getBalance(myWallet.publicKey.substring(2, myWallet.publicKey.length)));
+            setLastBlockIndex(blockchain.getLastBlock().index);
+        });
+
+    }, []);
+
+    //setup logout
+    
 
     const handleClickBtnInfo = () => {
         setModalState(enumState.VISIBLE);
@@ -70,7 +132,7 @@ export const ContentsInterface = (props) => {
                     <div className='content-item__main'>
                         <div className='text text--large'>
                             <p className='text__title'>Balance</p>
-                            <p className='text__desc'><span>0</span> MC</p>
+                            <p className='text__desc'><span>{balance}</span> MC</p>
                         </div>
                         <div className='content-item__subIcon'>
                             <img src=''></img>
@@ -85,7 +147,7 @@ export const ContentsInterface = (props) => {
                     <div className='content-item__main'>
                         <div className='text'>
                             <p className='text__title'>Network</p>
-                            <p className='text__desc'>Last block# : 12316780</p>
+                            <p className='text__desc'>Last block# : {lastBlockIndex}</p>
                         </div>
                         <div className='content-item__subIcon'>
                             <img src=''></img>

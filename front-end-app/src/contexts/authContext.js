@@ -5,12 +5,15 @@ export const authContext = React.createContext();
 
 export const AuthProvider = (props) => {
     const [myWallet, setMyWallet] = useState({publicKey: '', privateKey: ''});
-    const [auth, setAuth] = useState(true);
+    const [auth, setAuth] = useState(false);
 
     const setWallet = (value) =>{
         setMyWallet(value);
     }
-
+    const resetWallet = () =>{
+        setMyWallet({publicKey: '', privateKey: ''});
+        setAuth(false);
+    }
     const setAuthentication = (value) =>{
         setAuth(value);
     }
@@ -19,7 +22,8 @@ export const AuthProvider = (props) => {
         myWallet,
         setMyWallet: setWallet,
         auth,
-        setAuth: setAuthentication
+        setAuth: setAuthentication,
+        resetWallet
     }
 
     return (
