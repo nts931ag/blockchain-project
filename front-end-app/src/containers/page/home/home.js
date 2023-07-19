@@ -1,17 +1,32 @@
 import './style.scss';
-import {useEffect } from 'react';
+import {useEffect, useState, useContext } from 'react';
 import { TopBanner } from '../../topBanner/topBanner';
 import { About } from '../../about/about';
 import { FAQs } from '../../FAQs/FAQs';
 
+import { LogoutModal } from '../interface/contentsInterface/modalOption';
+import { Modal } from '../../../components/modal/modal';
 import {useLocation} from 'react-router-dom';
 
 import $ from 'jquery';
 
+import {authContext} from '../../../contexts/authContext';
+
+const enumState = {
+    HIDDEN: 'hidden',
+    CLOSE: 'close',
+    VISIBLE: 'visible'
+}
+
 export const Home = (props) => {
     const location = useLocation();
-
+    const [modalState, setModalState] = useState(enumState.HIDDEN);
+    const {resetWallet} = useContext(authContext);
     useEffect(() => {
+        if (sessionStorage.getItem('auth') === 'true'){
+            setModalState(enumState.VISIBLE);
+        }
+
         if (location.hash.length > 0){
             $('html,body').animate({
                 scrollTop: $(location.hash).offset().top,
@@ -55,6 +70,10 @@ export const Home = (props) => {
                     }
                 </div>
             </div>
+       
+            <Modal state={modalState} onClickOverlay={() => {setModalState(enumState.CLOSE); resetWallet();}}>
+                    <LogoutModal closeModal={() => {setModalState(enumState.CLOSE)}}></LogoutModal>
+            </Modal>
         </div>
     );
 };

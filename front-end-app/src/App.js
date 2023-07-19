@@ -16,6 +16,7 @@ import {AuthProvider} from '../src/contexts/authContext';
 function App() {
   return (
     <div className="App">
+            <AuthProvider>
         <Navbar></Navbar>
         <div className='App__content'>
           <Switch>
@@ -25,17 +26,16 @@ function App() {
             <Route path='/create-wallet'>
               <CreateWallet></CreateWallet>
             </Route>
-            <AuthProvider>
               <Route path='/access-wallet'>
                 <AccessWallet></AccessWallet>
               </Route>
               <Route path='/interface'>
                 <Interface></Interface>
               </Route>
-            </AuthProvider>
             
           </Switch>
         </div>
+            </AuthProvider>
         <Footer></Footer>
       </div>
   );

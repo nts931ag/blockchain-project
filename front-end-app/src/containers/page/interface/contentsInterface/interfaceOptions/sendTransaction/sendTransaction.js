@@ -1,7 +1,23 @@
 // @flow 
-import * as React from 'react';
+import React,{useState, useEffect} from 'react';
 import './style.scss';
 export const SendTransaction = (props) => {
+    const [amount, setAmount] = useState(0);
+    const [address, setAddress] = useState('');
+
+    useEffect(()=>{
+        setAmount(props.transaction.amount);
+        setAddress(props.transaction.receive);
+    },[props.transaction]);
+
+    const handleSetupTransaction = () => {
+        if (+amount === +0 || amount > props.walletBalance ){
+            return;
+        }
+        props.setTransaction({receive: address, amount: amount});
+        props.openModal();
+    }
+
     return (
         <div className='send-transaction'>
             <div className='send-transaction__title'>
@@ -16,12 +32,14 @@ export const SendTransaction = (props) => {
                         </div>
                         <div className='amount__main'>
                             <label>Amount</label>
-                            <input type='number' placeholder='Amount'/>
+                            <input value={amount} onChange={(e) => {setAmount(e.target.value)}} type='number' placeholder='Amount'/>
+                            <div className={`warning ${(+props.walletBalance >= +amount)? 'warning--hidden' : ''}`}>*Not enough MC to send.</div>
                         </div>
                     </div>
                     <div className='address'>
                             <label>Address</label>
-                            <input type='text' placeholder='Please enter the address'/>
+                            <input value={address} onChange={(e) => {setAddress(e.target.value)}} type='text' placeholder='Please enter the address (0x.....)'/>
+                            
                     </div>
                     <div className='tx-fee'>
                             <label>Transaction fee</label>
@@ -29,10 +47,10 @@ export const SendTransaction = (props) => {
                     </div>
                 </div>
                 <div className='btn-submit'>
-                    <div className='basic-button'>
+                    <div className='basic-button' onClick={handleSetupTransaction}>
                         Send Transaction
                     </div>
-                    <p className='btn-submit__clear-btn'>Clear all</p>
+                    <p className='btn-submit__clear-btn' onClick={() => {setAddress(''); setAmount(0);}}>Clear all</p>
                 </div>
             </div>
         </div>

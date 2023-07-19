@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/VuNam1812/my-coin-blockchain#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "cors": "^2.8.5",
     "crypto-js": "^4.0.0",
     "elliptic": "^6.5.4",
