@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VuNam1812/my-coin-blockchain.git"
+    "url": "git+https://github.com/nts931ag/blockchain-project.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/VuNam1812/my-coin-blockchain/issues"
+    "url": "https://github.com/nts931ag/blockchain-project/issues"
   },
-  "homepage": "https://github.com/VuNam1812/my-coin-blockchain#readme",
+  "homepage": "https://github.com/nts931ag/blockchain-project/readme",
   "dependencies": {
     "axios": "^0.21.1",
     "cors": "^2.8.5",
