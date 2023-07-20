@@ -1,7 +1,11 @@
 import './style.scss';
 import React from 'react';
 import { Expander } from '../../components/expander/expander';
+<<<<<<< HEAD
 import Phone from '../../phone.png'
+=======
+import Phone from '/Users/lucky/WebstormProjects/my-coin-blockchain/front-end-app/src/assets/Icon/phone.png'
+>>>>>>> 338873f (Release the stable version of the blockchain - v1.)
 
 export const FAQs = (props) => {
     return (
