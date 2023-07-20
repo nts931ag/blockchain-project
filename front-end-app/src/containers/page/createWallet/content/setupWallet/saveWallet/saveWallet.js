@@ -1,9 +1,9 @@
 // @flow 
 import CryptoJS from 'crypto-js';
 import EC from 'elliptic';
-import Share from '/Users/lucky/WebstormProjects/my-coin-blockchain/front-end-app/src/assets/Icon/share.svg'
-import Alert from '/Users/lucky/WebstormProjects/my-coin-blockchain/front-end-app/src/assets/Icon/alert.svg'
-import Backup from '/Users/lucky/WebstormProjects/my-coin-blockchain/front-end-app/src/assets/Icon/backup.svg'
+import Share from '../../../../../../assets/Icon/share.svg'
+import Alert from '../../../../../../assets/Icon/alert.svg'
+import Backup from '../../../../../../assets/Icon/backup.svg'
 
 
 
