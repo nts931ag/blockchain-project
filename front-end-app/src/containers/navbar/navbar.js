@@ -16,7 +16,7 @@ const enumState = {
     VISIBLE: 'visible'
 }
 
-const baseTrans = 18000;
+const baseTrans = 24000;
 const PORT = process.env.REACT_APP_API_PORT || 8080;
 
 export const Navbar = (props) => {
