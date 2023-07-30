@@ -7,6 +7,7 @@ import {authContext} from '../../contexts/authContext';
 
 import numeral from 'numeral';
 import axios from 'axios';
+import Logo from '../../../src/assets/Icon/logo.svg';
 
 
 const enumState = {
