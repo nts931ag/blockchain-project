@@ -3,9 +3,9 @@ import React, {useContext, useEffect} from 'react';
 import './style.scss';
 
 import { interfaceOptionContext } from '../../../../contexts/interfaceOptionContext';
-import DashBoardIcon from '../../../../assets/Icon/dashboard.png';
-import SendIcon from '../../../../assets/Icon/send.png';
-import HistoryIcon from '../../../../assets/Icon/history.png';
+import DashBoardIcon from '../../../../assets/Icon/dashboard.svg';
+import SendIcon from '../../../../assets/Icon/send.svg';
+import HistoryIcon from '../../../../assets/Icon/history.svg';
 export const SlideMenu = (props) => {
     const {option, setInterfaceOption} = useContext(interfaceOptionContext);
 

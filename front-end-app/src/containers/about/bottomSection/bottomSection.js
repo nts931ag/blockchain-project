@@ -1,7 +1,7 @@
 // @flow 
 import * as React from 'react';
 import './style.scss';
-import Wallet from '../../../../src/assets/Icon/wallet.png'
+import Wallet from '../../../../src/assets/Icon/wallet.svg'
 import Swap from '../../../../src/assets/Icon/swap.png'
 
 export const BottomSection = (props) => {

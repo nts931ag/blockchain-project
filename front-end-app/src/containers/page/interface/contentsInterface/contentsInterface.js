@@ -16,8 +16,8 @@ import { authContext } from '../../../../contexts/authContext';
 import { WalletModal, LogoutModal, SendTransactionModal } from './modalOption';
 
 // import BalanceAccountIcon from '../../../../assets/Icon/balance_account.png';
-import BlockChainIcon from '../../../../assets/Icon/blockchain.png';
-import Wallet from '../../../../assets/Icon/wallet.png';
+import BlockChainIcon from '../../../../assets/Icon/blockchain.svg';
+import Wallet from '../../../../assets/Icon/wallet.svg';
 
 
 

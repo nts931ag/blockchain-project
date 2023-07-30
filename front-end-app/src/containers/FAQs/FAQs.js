@@ -1,7 +1,7 @@
 import './style.scss';
 import React from 'react';
 import { Expander } from '../../components/expander/expander';
-import Phone from '../../../src/assets/Icon/phone.png';
+import Phone from '../../../src/assets/Icon/phone.svg';
 
 
 export const FAQs = (props) => {
