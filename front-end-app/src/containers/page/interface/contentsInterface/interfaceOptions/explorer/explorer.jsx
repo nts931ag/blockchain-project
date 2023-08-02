@@ -180,7 +180,7 @@ export const Explorer = ({ pendingTx }) => {
                     <tr key={index}>
                       <td>{item.index} </td>
                       <td>{item.nonce} </td>
-                      <td>{10} MC</td>
+                      <td>{2} MC</td>
                       <td>{new Date(item.timeStamp).toLocaleString()}</td>
                     </tr>
                   );

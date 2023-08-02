@@ -17,7 +17,8 @@
 
 2. Sử dụng thuật toán Proof Of Work/Proof Of Stake/
 
-# Link demo:
+# Link demo: 
+Youtube: <https://youtu.be/srkuDzLzvWg>
 # Link tài liệu tham khảo:
 
 ## Frontend: <https://github.com/vunam1218/my-coin-blockchain>
