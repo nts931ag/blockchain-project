@@ -320,7 +320,6 @@ function initPeerToPeer(
           await blockchain.addBlock(result);
 
           setStateMine(enumOptionMine.SUCCESS);
-          showToastSuccess("Mined successfully, + 1 MC");
 
           setPendingTx(blockchain.getPendingTransactions().length);
           setBalance(
