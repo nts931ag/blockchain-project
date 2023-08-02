@@ -6,6 +6,7 @@ import { interfaceOptionContext } from '../../../../contexts/interfaceOptionCont
 import DashBoardIcon from '../../../../assets/Icon/dashboard.svg';
 import SendIcon from '../../../../assets/Icon/send.svg';
 import HistoryIcon from '../../../../assets/Icon/history.svg';
+import EtherscanIcon from "../../../../assets/Icon/etherscan.svg";
 export const SlideMenu = (props) => {
   const { option, setInterfaceOption } = useContext(interfaceOptionContext);
 
@@ -40,5 +41,5 @@ const menuItems = [
   { srcImg: DashBoardIcon, text: "Dashboard" },
   { srcImg: SendIcon, text: "Send" },
   { srcImg: HistoryIcon, text: "History" },
-  { srcImg: HistoryIcon, text: "Explorer" },
+  { srcImg: EtherscanIcon, text: "Etherscan" },
 ];
