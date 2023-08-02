@@ -134,8 +134,8 @@ export const Explorer = ({ pendingTx }) => {
           alignItems: "center",
         }}
       >
-        <p> The MyCoin Blockchain Explorer </p>
-        <div
+        <p> Etherscan </p>
+        {/*<div
           style={{
             display: "flex",
             alignItems: "center",
@@ -159,7 +159,7 @@ export const Explorer = ({ pendingTx }) => {
             }} // Use flex: 1 to make the input fill the available space
           />
           <i className="fa fa-search" aria-hidden="true"></i>
-        </div>
+        </div>*/}
       </div>
 
       <div style={{ display: "flex" }}>
