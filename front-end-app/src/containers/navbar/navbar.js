@@ -74,13 +74,13 @@ export const Navbar = (props) => {
           <img src="https://www.myetherwallet.com/img/logo-mew.f6482e98.svg"></img>
         </Link>
         <ul className="navbar__container__items">
-          <li>
+          {/*<li>
             <label className="switch">
               <input type="checkbox" checked={true} />
               <span className="slider round"></span>
               Auto mining
             </label>
-          </li>
+          </li>*/}
 
           <li>
             <div className="buy-MC" onClick={handleBuyMC}>

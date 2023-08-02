@@ -18,7 +18,7 @@ class Blockchain {
     this.nodes = [];
     this.difficult = 3;
     this.canMine = false;
-    this.reward = 1;
+    this.reward = 2;
     this.minimumTx = 1;
     this.blocks = [this.getGenesisBlock()];
     this.io = io;
