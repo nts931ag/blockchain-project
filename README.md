@@ -1,8 +1,8 @@
 # Thông tin
 
-Họ và tên: Nguyễn Thái Sơn
+## Họ và tên: Nguyễn Thái Sơn
 
-MSSV: 19127541
+## MSSV: 19127541
 
 # Yêu cầu
 1. Phần giao diện và quá trình thao tác tương tự <https://www.myetherwallet.com/wallet/create>
@@ -18,4 +18,7 @@ MSSV: 19127541
 2. Sử dụng thuật toán Proof Of Work/Proof Of Stake/
 
 # Link demo:
-# Link tài liệu:
+# Link tài liệu tham khảo:
+
+## Frontend: <https://github.com/vunam1218/my-coin-blockchain>
+## Backend: <https://lhartikk.github.io/>
